@@ -8,6 +8,10 @@
 </head>
 <body>
 
+    <canvas id="trail-canvas"></canvas>
+
+    <div id="custom-cursor"></div>
+
     <div class="blob-container">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
@@ -157,13 +161,10 @@
             if (targetBtn) targetBtn.classList.add('active');
         }
 
-        // --- NEW RIPPLE ANIMATION LOGIC FOR CLICK/TOUCH ---
         function createRipple(e) {
-            // Target only items that act like clickable buttons
             const target = e.target.closest('.nav-tab, .btn-minimal, .nav-tab-link');
             if (!target) return;
 
-            // Remove any leftover ripples inside this specific button
             const oldRipple = target.querySelector('.click-ripple');
             if (oldRipple) oldRipple.remove();
 
@@ -171,18 +172,14 @@
             ripple.classList.add('click-ripple');
             target.appendChild(ripple);
 
-            // Get boundaries of the target element
             const rect = target.getBoundingClientRect();
             
-            // Handle both touch coordinates and mouse clicks
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
-            // Calculate precise coordinate point inside the element
             const x = clientX - rect.left;
             const y = clientY - rect.top;
 
-            // Determine maximum scaling width required to fill container area
             const size = Math.max(rect.width, rect.height) * 2;
 
             ripple.style.width = `${size}px`;
@@ -190,29 +187,92 @@
             ripple.style.left = `${x - size / 2}px`;
             ripple.style.top = `${y - size / 2}px`;
 
-            // Self destruct the node injection once animation completes cleanly
             ripple.addEventListener('animationend', () => {
                 ripple.remove();
             });
         }
 
-        // Listen to touch events for mobile, mouse clicks for desktop fallback
         document.addEventListener('touchstart', createRipple, { passive: true });
         document.addEventListener('mousedown', createRipple);
 
 
-        if (window.matchMedia('(hover: hover)').matches) {
+        // --- CUSTOM DESKTOP CURSOR WITH FADING TRAIL SYSTEM ---
+        const cursorDot = document.getElementById('custom-cursor');
+        const canvas = document.getElementById('trail-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let points = [];
+        let mouse = { x: 0, y: 0 };
+        let isMobile = !window.matchMedia('(hover: hover)').matches;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        if (!isMobile) {
+            document.body.classList.add('custom-cursor-enabled');
+
             document.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+
+                // Move the sharp target core dot instantly
+                cursorDot.style.left = `${mouse.x}px`;
+                cursorDot.style.top = `${mouse.y}px`;
+                cursorDot.style.opacity = '1';
+
+                // Append coordinates to the trail engine
+                points.push({ x: mouse.x, y: mouse.y, age: 0 });
+            });
+
+            document.addEventListener('mouseleave', () => {
+                cursorDot.style.opacity = '0';
+            });
+
+            // Smooth main animation framework loop
+            function tick() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Maximum frames a point lives before fading completely out
+                const maxAge = 25; 
+
+                for (let i = 0; i < points.length; i++) {
+                    const p = points[i];
+                    p.age++;
+
+                    if (p.age > maxAge) {
+                        points.splice(i, 1);
+                        i--;
+                        continue;
+                    }
+
+                    // Calculate transparency logic over timeline age
+                    const opacity = 1 - (p.age / maxAge);
+                    
+                    // Render individual fading steps along vector track
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 3.5 * opacity, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.45})`;
+                    ctx.fill();
+                }
+
+                // Parallax card system processing
                 const intensity = 12; 
-                const x = (e.clientX / window.innerWidth - 0.5) * intensity;
-                const y = (e.clientY / window.innerHeight - 0.5) * intensity;
-                
+                const x = (mouse.x / window.innerWidth - 0.5) * intensity;
+                const y = (mouse.y / window.innerHeight - 0.5) * intensity;
                 const target = document.querySelector('.parallax-target');
-                if (target) {
+                if (target && document.querySelector('.active-page#page-home')) {
                     target.style.transform = `translate(${x}px, ${y}px)`;
                 }
-            });
+
+                requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
         }
+
 
         async function fetchBotStats() {
             try {
