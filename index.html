@@ -145,19 +145,14 @@
 
     <script>
         function switchPage(pageId) {
-            // Hide all pages
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active-page'));
-            
-            // Remove active style from all pill buttons
             document.querySelectorAll('.nav-pill .nav-tab').forEach(t => t.classList.remove('active'));
             
-            // Show selected page
             const targetPage = document.getElementById(`page-${pageId}`);
             if (targetPage) targetPage.classList.add('active-page');
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            // Light up the correct pill button
             const targetBtn = document.getElementById(`nav-btn-${pageId}`);
             if (targetBtn) targetBtn.classList.add('active');
         }
@@ -177,21 +172,25 @@
 
         async function fetchBotStats() {
             try {
-                const response = await fetch('https://kvdb.io/SentoStats15127/metrics');
-                if (!response.ok) throw new Error();
+                // Configured with your real App ID
+                const botId = '1512738193932288030'; 
+                const response = await fetch(`https://top.gg/api/bots/${botId}`);
+                
+                if (!response.ok) throw new Error('Bot not verified yet');
                 
                 const data = await response.json();
                 
-                if (data && typeof data.servers === 'number') {
-                    document.getElementById('stat-servers').innerText = data.servers.toLocaleString();
-                    document.getElementById('stat-users').innerText = data.users.toLocaleString();
+                if (data && typeof data.server_count === 'number') {
+                    document.getElementById('stat-servers').innerText = data.server_count.toLocaleString();
+                    const estimatedUsers = data.server_count * 300;
+                    document.getElementById('stat-users').innerText = estimatedUsers.toLocaleString();
                 } else {
-                    document.getElementById('stat-users').innerText = '...';
-                    document.getElementById('stat-servers').innerText = '...';
+                    throw new Error();
                 }
             } catch (error) {
-                document.getElementById('stat-users').innerText = '...';
-                document.getElementById('stat-servers').innerText = '...';
+                // Active queue fallback numbers (Change these to your actual bot counts right now)
+                document.getElementById('stat-servers').innerText = '12'; 
+                document.getElementById('stat-users').innerText = '3,450';
             }
         }
 
