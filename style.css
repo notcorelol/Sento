@@ -14,6 +14,47 @@
     padding: 0;
 }
 
+/* --- MOUSE LOGIC FOR CUSTOM STYLING OVERRIDES --- */
+body.custom-cursor-enabled {
+    cursor: none;
+}
+
+body.custom-cursor-enabled a,
+body.custom-cursor-enabled button,
+body.custom-cursor-enabled .nav-tab {
+    cursor: none !important;
+}
+
+#custom-cursor {
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-pure);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+/* Expand the main pointer dot slightly when hovering actionable targets */
+body.custom-cursor-enabled button:hover ~ #custom-cursor,
+body.custom-cursor-enabled a:hover ~ #custom-cursor,
+body.custom-cursor-enabled .nav-tab:hover ~ #custom-cursor {
+    transform: translate(-50%, -50%) scale(1.4);
+}
+
+#trail-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-pure);
@@ -80,10 +121,9 @@ body {
     gap: 0.25rem;
 }
 
-/* --- CLICKABLE ITEMS PREPPED FOR OVERLAY RIPPLE EFFECT --- */
 .nav-tab, .btn-minimal, .nav-tab-link {
     position: relative;
-    overflow: hidden; /* Clips the expanding circle inside the bounds of the button */
+    overflow: hidden;
 }
 
 .nav-tab {
@@ -93,7 +133,6 @@ body {
     font-size: 0.9rem;
     font-weight: 500;
     padding: 0.5rem 1.1rem;
-    cursor: pointer;
     border-radius: 100px;
     transition: color 0.2s ease, background-color 0.2s ease;
 }
@@ -128,7 +167,6 @@ body {
     fill: currentColor;
 }
 
-/* --- THE DISAPPEARING 'O' RIPPLE ELEMENT --- */
 .click-ripple {
     position: absolute;
     border-radius: 50%;
@@ -216,7 +254,6 @@ body {
     font-weight: 500;
     padding: 0.75rem 1.4rem;
     border-radius: 10px;
-    cursor: pointer;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
