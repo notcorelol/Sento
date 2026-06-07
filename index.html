@@ -26,7 +26,7 @@
 
     <section id="page-home" class="page-content active-page">
         <main class="centered-hero parallax-target">
-            <h1 class="main-title">sento</h1>
+            <h1 class="main-title">bite</h1>
             
             <p class="stats-subtext">
                 Sustaining <span class="highlight" id="stat-users">...</span> users across <span class="highlight" id="stat-servers">...</span> guilds.
@@ -103,12 +103,6 @@
         </main>
     </section>
 
-    <footer class="minimal-footer">
-        <button onclick="switchPage('privacy')">Privacy Policy</button>
-        <span class="footer-dot">·</span>
-        <button onclick="switchPage('terms')">Terms of Service</button>
-    </footer>
-
     <section id="page-privacy" class="page-content">
         <main class="container legal-container">
             <div class="minimal-section-header">
@@ -120,7 +114,7 @@
                 <p>Sento processes minimal data strictly required for core operations. This includes user IDs, guild IDs, and channel IDs contextually processed through active Discord interactions.</p>
                 
                 <h3>2. Data Usage</h3>
-                <p>Collected metrics are processed locally to handle command modules, moderation indexing, system level progression, and live layout telemetry. Data is never cached long-term unless explicit application structures dictate functionality.</p>
+                <p>Collected metrics are processed locally to handle command modules, moderation indexing, system level progression, and live layout telemetry.</p>
                 
                 <h3>3. Third-Party Sharing</h3>
                 <p>No processed variables or database items are transferred, sold, or distributed to any external entities, companies, or secondary infrastructure layers.</p>
@@ -147,9 +141,13 @@
         </main>
     </section>
 
-    <script>
-        const BOT_ID = '1512738193932288030';
+    <footer class="minimal-footer">
+        <button onclick="switchPage('privacy')">Privacy Policy</button>
+        <span class="footer-dot">·</span>
+        <button onclick="switchPage('terms')">Terms of Service</button>
+    </footer>
 
+    <script>
         function switchPage(pageId) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('.nav-pill button').forEach(t => t.classList.remove('active'));
@@ -186,8 +184,8 @@
                     document.getElementById('stat-servers').innerText = data.servers.toLocaleString();
                     document.getElementById('stat-users').innerText = data.users.toLocaleString();
                 } else {
-                    document.getElementById('stat-users').innerText = '0';
-                    document.getElementById('stat-servers').innerText = '0';
+                    document.getElementById('stat-users').innerText = '...';
+                    document.getElementById('stat-servers').innerText = '...';
                 }
             } catch (error) {
                 document.getElementById('stat-users').innerText = '...';
