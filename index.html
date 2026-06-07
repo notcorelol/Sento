@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sento - The Ultimate Discord Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="logo">Sento</span>
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle light and dark mode">
+                <span class="icon-sun">Light</span> / <span class="icon-moon">Dark</span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-layout">
+            <div class="hero-text">
+                <h1>Sento</h1>
+                <p>A powerful, feature-rich Discord assistant built to enhance your server experience with advanced moderation, leveling, tools, and entertainment modules.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn-primary">Invite Sento</a>
+                    <a href="https://discord.gg/ztpXhZkefW" class="btn-secondary" target="_blank" rel="noopener noreferrer">Support Server</a>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <img src="sento.jpg" alt="Sento Discord Bot Logo" class="bot-logo">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="features">
+            <h2>Core Modules</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Moderation & Admin</h3>
+                    <p>Keep your community safe with mass actions, user logging notes, and a built-in case management tracking system.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Leveling & XP</h3>
+                    <p>Reward active members automatically with message-based XP tracking and customizable auto-assigned roles upon leveling up.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Reaction Roles</h3>
+                    <p>Let users self-assign roles seamlessly using emoji selection menus for cleaner server categorization.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="commands-section">
+            <h2>Popular Commands</h2>
+            <p class="section-subtitle">Sento is fully updated to support modern Discord Slash Commands. Explore some of the core features below.</p>
+            
+            <div class="commands-grid">
+                <div class="command-box">
+                    <div class="command-header">
+                        <span class="command-name">/ban <span class="command-arg">user reason</span></span>
+                        <span class="command-tag tag-red">Admin</span>
+                    </div>
+                    <p class="command-desc">Bans a specified user from the server and records the incident in the moderation log history.</p>
+                </div>
+
+                <div class="command-box">
+                    <div class="command-header">
+                        <span class="command-name">/warn <span class="command-arg">user reason</span></span>
+                        <span class="command-tag tag-red">Mod</span>
+                    </div>
+                    <p class="command-desc">Issues a formal warning to a user, storing the tracking case details in their user profile card.</p>
+                </div>
+
+                <div class="command-box">
+                    <div class="command-header">
+                        <span class="command-name">/rank <span class="command-arg">[user]</span></span>
+                        <span class="command-tag tag-orange">Utility</span>
+                    </div>
+                    <p class="command-desc">Displays the current leveling card, showing total XP progress, server rank, and message counts.</p>
+                </div>
+
+                <div class="command-box">
+                    <div class="command-header">
+                        <span class="command-name">/todo <span class="command-arg">action</span></span>
+                        <span class="command-tag tag-orange">Utility</span>
+                    </div>
+                    <p class="command-desc">Manages a personal to-do list embedded within your direct messages or targeted text channels.</p>
+                </div>
+
+                <div class="command-box">
+                    <div class="command-header">
+                        <span class="command-name">/stats</span>
+                        <span class="command-tag tag-neutral">General</span>
+                    </div>
+                    <p class="command-desc">Outputs performance stats, including cluster ping latency, active servers, and total member counts.</p>
+                </div>
+
+                <div class="command-box">
+                    <div class="command-header">
+                        <span class="command-name">/help <span class="command-arg">[command]</span></span>
+                        <span class="command-tag tag-neutral">General</span>
+                    </div>
+                    <p class="command-desc">Fetches the comprehensive command dictionary layout or details regarding a single specified tool.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Sento Bot. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        
+        // Detect stored theme preference or use system defaults
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+        } else {
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
+        }
+
+        // Live visual switch logic
+        toggleBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            let newTheme = theme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>
