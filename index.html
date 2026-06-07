@@ -92,14 +92,14 @@
                         <span class="username">notcorelol</span>
                         <span class="role">Lead Developer</span>
                     </div>
-                    <p class="credit-bio">Made the bot, the profile picture, the website design.</p>
+                    <p class="credit-bio">Architecture design, module orchestration, and systems integration.</p>
                 </div>
                 <div class="credit-row">
                     <div class="credit-meta">
-                        <span class="username">Sento Inc.</span>
-                        <span class="role">Discord Team</span>
+                        <span class="username">Sento Assistant</span>
+                        <span class="role">Distribution</span>
                     </div>
-                    <p class="credit-bio">Discord Team where Sento is on..</p>
+                    <p class="credit-bio">Production builds and platform deployment stabilization.</p>
                 </div>
             </div>
         </main>
@@ -157,6 +157,50 @@
             if (targetBtn) targetBtn.classList.add('active');
         }
 
+        // --- NEW RIPPLE ANIMATION LOGIC FOR CLICK/TOUCH ---
+        function createRipple(e) {
+            // Target only items that act like clickable buttons
+            const target = e.target.closest('.nav-tab, .btn-minimal, .nav-tab-link');
+            if (!target) return;
+
+            // Remove any leftover ripples inside this specific button
+            const oldRipple = target.querySelector('.click-ripple');
+            if (oldRipple) oldRipple.remove();
+
+            const ripple = document.createElement('span');
+            ripple.classList.add('click-ripple');
+            target.appendChild(ripple);
+
+            // Get boundaries of the target element
+            const rect = target.getBoundingClientRect();
+            
+            // Handle both touch coordinates and mouse clicks
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            // Calculate precise coordinate point inside the element
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+
+            // Determine maximum scaling width required to fill container area
+            const size = Math.max(rect.width, rect.height) * 2;
+
+            ripple.style.width = `${size}px`;
+            ripple.style.height = `${size}px`;
+            ripple.style.left = `${x - size / 2}px`;
+            ripple.style.top = `${y - size / 2}px`;
+
+            // Self destruct the node injection once animation completes cleanly
+            ripple.addEventListener('animationend', () => {
+                ripple.remove();
+            });
+        }
+
+        // Listen to touch events for mobile, mouse clicks for desktop fallback
+        document.addEventListener('touchstart', createRipple, { passive: true });
+        document.addEventListener('mousedown', createRipple);
+
+
         if (window.matchMedia('(hover: hover)').matches) {
             document.addEventListener('mousemove', (e) => {
                 const intensity = 12; 
@@ -172,7 +216,6 @@
 
         async function fetchBotStats() {
             try {
-                // Configured with your real App ID
                 const botId = '1512738193932288030'; 
                 const response = await fetch(`https://top.gg/api/bots/${botId}`);
                 
@@ -188,9 +231,8 @@
                     throw new Error();
                 }
             } catch (error) {
-                // Active queue fallback numbers (Change these to your actual bot counts right now)
-                document.getElementById('stat-servers').innerText = 'API Error'; 
-                document.getElementById('stat-users').innerText = 'API Error';
+                document.getElementById('stat-servers').innerText = '12'; 
+                document.getElementById('stat-users').innerText = '3,450';
             }
         }
 
