@@ -205,7 +205,6 @@ body {
     padding: 9rem 0 6rem 0;
 }
 
-/* --- HOME SCROLL STRUCTURE --- */
 .home-scroll-container {
     width: 100%;
     display: flex;
@@ -283,57 +282,46 @@ body {
     border-color: rgba(255, 255, 255, 0.12);
 }
 
-.btn-icon {
-    width: 15px;
-    height: 15px;
-    opacity: 0.8;
-}
-
-/* --- HOME PAGE GRID HOOKS --- */
-.features-grid {
+.features-pill-grid {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.75rem;
     width: 100%;
 }
 
-.feature-card {
+.feature-bubble {
     background-color: rgba(255, 255, 255, 0.01);
     border: 1px solid rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    padding: 1.5rem;
+    border-radius: 100px;
+    padding: 0.8rem 1.5rem;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    transition: border-color 0.2s ease;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.feature-card:hover {
+.feature-bubble:hover {
     border-color: rgba(255, 255, 255, 0.06);
+    background-color: rgba(255, 255, 255, 0.015);
 }
 
-.feature-icon-wrapper {
-    color: var(--text-pure);
-    width: 24px;
-    height: 24px;
-    margin-bottom: 0.25rem;
-    opacity: 0.85;
-}
-
-.feature-card h3 {
-    font-size: 1.15rem;
+.bubble-title {
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-pure);
+    white-space: nowrap;
 }
 
-.feature-card p {
-    font-size: 0.9rem;
+.bubble-desc {
+    font-size: 0.85rem;
     color: var(--text-muted);
-    line-height: 1.5;
+    text-align: right;
+    line-height: 1.3;
 }
 
 .minimal-section-header {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
 }
 
 .minimal-section-header h2 {
@@ -470,6 +458,18 @@ body {
 
     .container {
         padding: 7.5rem 0 4rem 0;
+    }
+
+    .feature-bubble {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 16px;
+        padding: 1.1rem;
+        gap: 0.35rem;
+    }
+
+    .bubble-desc {
+        text-align: left;
     }
 
     .featured-cmd-section {
