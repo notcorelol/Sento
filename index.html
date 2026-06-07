@@ -104,8 +104,6 @@
     </section>
 
     <script>
-        const BOT_ID = '1512738193932288030';
-
         function switchPage(pageId) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('.nav-pill button').forEach(t => t.classList.remove('active'));
@@ -133,27 +131,21 @@
 
         async function fetchBotStats() {
             try {
-                const targetUrl = `https://top.gg/api/bots/${BOT_ID}`;
-                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
-                
-                const response = await fetch(proxyUrl);
+                const response = await fetch('https://kvdb.io/SentoStats15127/metrics');
                 if (!response.ok) throw new Error();
                 
-                const wrapper = await response.json();
-                const data = JSON.parse(wrapper.contents);
+                const data = await response.json();
                 
-                if (data && data.server_count) {
-                    const serverCount = data.server_count;
-                    document.getElementById('stat-servers').innerText = serverCount.toLocaleString();
-                    document.getElementById('stat-users').innerText = (serverCount * 45).toLocaleString();
+                if (data && typeof data.servers === 'number') {
+                    document.getElementById('stat-servers').innerText = data.servers.toLocaleString();
+                    document.getElementById('stat-users').innerText = data.users.toLocaleString();
                 } else {
-                    document.getElementById('stat-users').innerText = '1,420';
-                    document.getElementById('stat-servers').innerText = '32';
+                    document.getElementById('stat-users').innerText = '0';
+                    document.getElementById('stat-servers').innerText = '0';
                 }
-                
             } catch (error) {
-                document.getElementById('stat-users').innerText = '1,420';
-                document.getElementById('stat-servers').innerText = '32';
+                document.getElementById('stat-users').innerText = '...';
+                document.getElementById('stat-servers').innerText = '...';
             }
         }
 
