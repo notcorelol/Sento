@@ -8,116 +8,165 @@
 </head>
 <body>
 
+    <!-- Animated Blurry Background Elements -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
     <nav class="navbar">
         <div class="nav-container">
             <span class="logo">Sento</span>
+            <div class="nav-menu">
+                <button class="nav-tab active" onclick="switchPage('home')">Home</button>
+                <button class="nav-tab" onclick="switchPage('commands')">Commands</button>
+                <button class="nav-tab" onclick="switchPage('credits')">Credits</button>
+            </div>
             <button id="theme-toggle" class="theme-btn" aria-label="Toggle light and dark mode">
-                <span class="icon-sun">Light</span> / <span class="icon-moon">Dark</span>
+                Theme
             </button>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="container hero-layout">
-            <div class="hero-text">
-                <h1>Sento</h1>
-                <p>A powerful, feature-rich Discord assistant built to enhance your server experience with advanced moderation, leveling, tools, and entertainment modules.</p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn-primary">Invite Sento</a>
-                    <a href="https://discord.gg/ztpXhZkefW" class="btn-secondary" target="_blank" rel="noopener noreferrer">Support Server</a>
+    <!-- HOME PAGE -->
+    <section id="page-home" class="page-content active-page">
+        <header class="hero">
+            <div class="container hero-layout">
+                <div class="hero-text tilt-target">
+                    <h1>Sento</h1>
+                    <p>A super-charged, feature-packed Discord companion built to turn your server into the ultimate community hotspot. Leveling, moderation, and full utility control, all in one package.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn-primary cartoon-bounce">Invite Sento</a>
+                        <a href="https://discord.gg/ztpXhZkefW" class="btn-secondary cartoon-bounce" target="_blank" rel="noopener noreferrer">
+                            <!-- SVG Discord Icon Inside Button -->
+                            <svg class="discord-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36"><path fill="currentColor" d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.65-2.1a75.22,75.22,0,0,0,72.88,0c.84.73,1.74,1.43,2.65,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.73,105.73,0,0,0,31-18.83C129.66,48.86,123.77,26,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
+                            Support Server
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image-container image-float">
+                    <img src="sento.jpg" alt="Sento Discord Bot Logo" class="bot-logo">
                 </div>
             </div>
-            <div class="hero-image-container">
-                <img src="sento.jpg" alt="Sento Discord Bot Logo" class="bot-logo">
-            </div>
-        </div>
-    </header>
+        </header>
 
-    <main class="container">
-        <section class="features">
-            <h2>Core Modules</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Moderation & Admin</h3>
-                    <p>Keep your community safe with mass actions, user logging notes, and a built-in case management tracking system.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Leveling & XP</h3>
-                    <p>Reward active members automatically with message-based XP tracking and customizable auto-assigned roles upon leveling up.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Reaction Roles</h3>
-                    <p>Let users self-assign roles seamlessly using emoji selection menus for cleaner server categorization.</p>
-                </div>
-            </div>
-        </section>
-
-        <hr class="section-divider">
-
-        <section class="commands-section">
-            <h2>Popular Commands</h2>
-            <p class="section-subtitle">Sento is fully updated to support modern Discord Slash Commands. Explore some of the core features below.</p>
-            
-            <div class="commands-grid">
-                <div class="command-box">
-                    <div class="command-header">
-                        <span class="command-name">/ban <span class="command-arg">user reason</span></span>
-                        <span class="command-tag tag-red">Admin</span>
+        <main class="container">
+            <section class="features">
+                <h2>Core Modules</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Moderation & Admin</h3>
+                        <p>Keep your community locked down tight. Mass actions, incident logs, and customizable warning cards that look clean.</p>
                     </div>
-                    <p class="command-desc">Bans a specified user from the server and records the incident in the moderation log history.</p>
-                </div>
-
-                <div class="command-box">
-                    <div class="command-header">
-                        <span class="command-name">/warn <span class="command-arg">user reason</span></span>
-                        <span class="command-tag tag-red">Mod</span>
+                    <div class="feature-card">
+                        <h3>Leveling & XP</h3>
+                        <p>Keep the chat moving. Drop global XP multipliers, let members rank up, and hand out premium profile cards.</p>
                     </div>
-                    <p class="command-desc">Issues a formal warning to a user, storing the tracking case details in their user profile card.</p>
-                </div>
-
-                <div class="command-box">
-                    <div class="command-header">
-                        <span class="command-name">/rank <span class="command-arg">[user]</span></span>
-                        <span class="command-tag tag-orange">Utility</span>
+                    <div class="feature-card">
+                        <h3>Reaction Roles</h3>
+                        <p>No messy commands needed. Let your members tap customized buttons to choose their roles instantly.</p>
                     </div>
-                    <p class="command-desc">Displays the current leveling card, showing total XP progress, server rank, and message counts.</p>
                 </div>
+            </section>
+        </main>
+    </section>
 
-                <div class="command-box">
-                    <div class="command-header">
-                        <span class="command-name">/todo <span class="command-arg">action</span></span>
-                        <span class="command-tag tag-orange">Utility</span>
+    <!-- COMMANDS PAGE -->
+    <section id="page-commands" class="page-content">
+        <main class="container">
+            <div class="commands-section">
+                <h2>Popular Commands</h2>
+                <p class="section-subtitle">Sento runs completely on modern, snappy Slash Commands. Check out the setup tools.</p>
+                
+                <div class="commands-grid">
+                    <div class="command-box">
+                        <div class="command-header">
+                            <span class="command-name">/ban <span class="command-arg">user reason</span></span>
+                            <span class="command-tag tag-red">Admin</span>
+                        </div>
+                        <p class="command-desc">Bans an unwanted user and saves the action directly to the moderator's case dashboard file.</p>
                     </div>
-                    <p class="command-desc">Manages a personal to-do list embedded within your direct messages or targeted text channels.</p>
-                </div>
-
-                <div class="command-box">
-                    <div class="command-header">
-                        <span class="command-name">/stats</span>
-                        <span class="command-tag tag-neutral">General</span>
+                    <div class="command-box">
+                        <div class="command-header">
+                            <span class="command-name">/warn <span class="command-arg">user reason</span></span>
+                            <span class="command-tag tag-red">Mod</span>
+                        </div>
+                        <p class="command-desc">Issues an automated warning ticket to a troublesome user and logs their moderation count history.</p>
                     </div>
-                    <p class="command-desc">Outputs performance stats, including cluster ping latency, active servers, and total member counts.</p>
-                </div>
-
-                <div class="command-box">
-                    <div class="command-header">
-                        <span class="command-name">/help <span class="command-arg">[command]</span></span>
-                        <span class="command-tag tag-neutral">General</span>
+                    <div class="command-box">
+                        <div class="command-header">
+                            <span class="command-name">/rank <span class="command-arg">[user]</span></span>
+                            <span class="command-tag tag-orange">Utility</span>
+                        </div>
+                        <p class="command-desc">Generates a neat graphic showing current active server XP standings, levels, and rank counts.</p>
                     </div>
-                    <p class="command-desc">Fetches the comprehensive command dictionary layout or details regarding a single specified tool.</p>
+                    <div class="command-box">
+                        <div class="command-header">
+                            <span class="command-name">/todo <span class="command-arg">action</span></span>
+                            <span class="command-tag tag-orange">Utility</span>
+                        </div>
+                        <p class="command-desc">Creates an interactive, personal checklist directly inside the channel or your secret DMs.</p>
+                    </div>
+                    <div class="command-box">
+                        <div class="command-header">
+                            <span class="command-name">/stats</span>
+                            <span class="command-tag tag-neutral">General</span>
+                        </div>
+                        <p class="command-desc">Pings core processes and updates live cluster latency counts, server numbers, and shard counts.</p>
+                    </div>
+                    <div class="command-box">
+                        <div class="command-header">
+                            <span class="command-name">/help <span class="command-arg">[command]</span></span>
+                            <span class="command-tag tag-neutral">General</span>
+                        </div>
+                        <p class="command-desc">Brings up an interactive, sliding menu containing your specific configured modules guide.</p>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </main>
+    </section>
+
+    <!-- CREDITS PAGE -->
+    <section id="page-credits" class="page-content">
+        <main class="container">
+            <div class="credits-section">
+                <h2>The Dream Team</h2>
+                <p class="section-subtitle">The masterminds behind the development and design execution of Sento.</p>
+                <div class="credits-grid">
+                    <div class="credit-card profile-pop">
+                        <div class="avatar-placeholder">NC</div>
+                        <h3>notcorelol</h3>
+                        <span class="role-badge">Founder & Lead Dev</span>
+                        <p>Programmed the foundational bot architecture, designed the system engines, and manages global sharding modules.</p>
+                    </div>
+                    <div class="credit-card profile-pop">
+                        <div class="avatar-placeholder">S</div>
+                        <h3>Sento Team</h3>
+                        <span class="role-badge">Community & Growth</span>
+                        <p>Keeps the main support engine rolling smoothly and coordinates beta rollouts for active production builds.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
 
     <footer>
-        <p>&copy; 2026 Sento Bot. All rights reserved.</p>
+        <p>&copy; 2026 Sento Bot. Crafted with power.</p>
     </footer>
 
     <script>
+        // PAGE SWITCHER SCRIPT
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active-page'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            document.getElementById(`page-${pageId}`).classList.add('active-page');
+            event.target.classList.add('active');
+        }
+
+        // LIGHT/DARK MODE LOGIC
         const toggleBtn = document.getElementById('theme-toggle');
-        
-        // Detect stored theme preference or use system defaults
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) {
             document.documentElement.setAttribute('data-theme', currentTheme);
@@ -126,13 +175,23 @@
             document.documentElement.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
         }
 
-        // Live visual switch logic
         toggleBtn.addEventListener('click', () => {
             let theme = document.documentElement.getAttribute('data-theme');
             let newTheme = theme === 'dark' ? 'light' : 'dark';
-            
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+        });
+
+        // CURSOR MOUSE PARALLAX EFFECT
+        document.addEventListener('mousemove', (e) => {
+            const amount = 25; 
+            const x = (e.clientX / window.innerWidth - 0.5) * amount;
+            const y = (e.clientY / window.innerHeight - 0.5) * amount;
+            
+            const targets = document.querySelectorAll('.tilt-target');
+            targets.forEach(t => {
+                t.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            });
         });
     </script>
 </body>
