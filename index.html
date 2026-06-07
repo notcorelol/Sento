@@ -103,7 +103,53 @@
         </main>
     </section>
 
+    <footer class="minimal-footer">
+        <button onclick="switchPage('privacy')">Privacy Policy</button>
+        <span class="footer-dot">·</span>
+        <button onclick="switchPage('terms')">Terms of Service</button>
+    </footer>
+
+    <section id="page-privacy" class="page-content">
+        <main class="container legal-container">
+            <div class="minimal-section-header">
+                <h2>Privacy Policy</h2>
+                <p>Last updated: June 2026</p>
+            </div>
+            <div class="legal-text">
+                <h3>1. Data Collection</h3>
+                <p>Sento processes minimal data strictly required for core operations. This includes user IDs, guild IDs, and channel IDs contextually processed through active Discord interactions.</p>
+                
+                <h3>2. Data Usage</h3>
+                <p>Collected metrics are processed locally to handle command modules, moderation indexing, system level progression, and live layout telemetry. Data is never cached long-term unless explicit application structures dictate functionality.</p>
+                
+                <h3>3. Third-Party Sharing</h3>
+                <p>No processed variables or database items are transferred, sold, or distributed to any external entities, companies, or secondary infrastructure layers.</p>
+            </div>
+        </main>
+    </section>
+
+    <section id="page-terms" class="page-content">
+        <main class="container legal-container">
+            <div class="minimal-section-header">
+                <h2>Terms of Service</h2>
+                <p>Last updated: June 2026</p>
+            </div>
+            <div class="legal-text">
+                <h3>1. Terms of Acceptance</h3>
+                <p>By connecting Sento to your guild terminal or executing command structures, you agree to comply with these terms, alongside the official Discord Developer Policy and Terms of Service.</p>
+                
+                <h3>2. Proper Usage</h3>
+                <p>Users shall not abuse system endpoints, exploit logic loops, or deploy Sento in environments that violate local laws or distribute hazardous text payloads.</p>
+                
+                <h3>3. Service Disclaimer</h3>
+                <p>Sento is distributed "as-is" without warranty metrics. The developers assume zero liability for structural command impacts, network connection dropping, or unexpected profile data synchronization anomalies.</p>
+            </div>
+        </main>
+    </section>
+
     <script>
+        const BOT_ID = '1512738193932288030';
+
         function switchPage(pageId) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('.nav-pill button').forEach(t => t.classList.remove('active'));
