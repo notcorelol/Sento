@@ -80,6 +80,12 @@ body {
     gap: 0.25rem;
 }
 
+/* --- CLICKABLE ITEMS PREPPED FOR OVERLAY RIPPLE EFFECT --- */
+.nav-tab, .btn-minimal, .nav-tab-link {
+    position: relative;
+    overflow: hidden; /* Clips the expanding circle inside the bounds of the button */
+}
+
 .nav-tab {
     background: transparent;
     border: none;
@@ -108,6 +114,7 @@ body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    border-radius: 100px;
     transition: color 0.2s ease;
 }
 
@@ -119,6 +126,23 @@ body {
     width: 16px;
     height: 16px;
     fill: currentColor;
+}
+
+/* --- THE DISAPPEARING 'O' RIPPLE ELEMENT --- */
+.click-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(0);
+    pointer-events: none;
+    animation: rippleEffect 0.45s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(1);
+        opacity: 0;
+    }
 }
 
 .page-content {
